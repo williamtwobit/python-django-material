@@ -4,12 +4,22 @@
 
 {% block content %}
 
-<h1>{{ topic.title }}</h1>
-{% for lesson in lessons %}
-  <a href="{% url 'lesson' lesson_pk=lesson.pk topic_pk=topic.pk %}"><div class="lesson">
-  <header>{{lesson.title}}</header>
-  <div class="description">{{lesson.description}}</div>
-  </div></a>
-{% endfor %}
-
+<div class="topic container">
+  <header>
+    <h1>{{ topic.title }}</h1>
+    <span>{{topic.description}}</span>
+  </header>
+  <div class="cards container">
+  {% for lesson in lessons %}
+    <a href="{% url 'lesson' lesson_pk=lesson.pk topic_pk=topic.pk %}">
+      <div class="lesson card">
+      <header>{{lesson.title}}</header>
+        <div class="description">
+          {{lesson.description}}
+        </div>
+      </div>
+    </a>
+  {% endfor %}
+  </div>
+</div>
 {% endblock %}
