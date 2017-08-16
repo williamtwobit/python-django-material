@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ topic.title }}{% endblock %}
+
+{% block content %}
+
+<span>{{ topic.title }}</span>
+<header><h1>{{ lesson.title }}</h1>
+<p>{{ lesson.description }}</p>
+<p>{{ lesson.intro }}</p></header>
+<div class="steps">
+  {% for step in steps %}
+    <!-- {{ step.title }} -->
+    {% if step.order == 1 %}
+      <div class="step active" id="{{ step.order }}">
+        <div class="step-header">{{ step.title }}</div>
+        <img src="/teachable/images/{{step.image}}">
+      </div>
+    {% else %}
+      <div class="step" id="{{ step.order }}">
+        <div class="step-header">{{ step.title }}</div>
+        <img src="/teachable/images/{{step.image}}">
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% endblock %}

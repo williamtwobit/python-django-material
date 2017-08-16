@@ -1,0 +1,8 @@
+{% block sideBar %}
+<header>Topics</header>
+<ul>
+    {% for topic in topics %}
+    <a href="{% url 'topic' pk=topic.pk %}"><li>{{ topic.title }}</li></a>
+    {% endfor %}
+  </ul>
+{% endblock %}
