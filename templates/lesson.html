@@ -4,25 +4,45 @@
 
 {% block content %}
 
-<span>{{ topic.title }}</span>
-<header><h1>{{ lesson.title }}</h1>
-<p>{{ lesson.description }}</p>
-<p>{{ lesson.intro }}</p></header>
-<div class="steps">
-  {% for step in steps %}
-    <!-- {{ step.title }} -->
-    {% if step.order == 1 %}
-      <div class="step active" id="{{ step.order }}">
-        <div class="step-header">{{ step.title }}</div>
-        <img src="/teachable/images/{{step.image}}">
+<div class="topic container">
+  <header>
+    <h1>{{ lesson.title }}</h1>
+    <span>You're Learning: {{ topic.title }}</span>
+  </header>
+  <div class="steps container">
+    <div class="page container inactive"><span class="back"></span></div>
+    <div class="steps content">
+      <div class="step card active first" id="intro">
+        <p class="intro">{{ lesson.intro }}</p>
       </div>
-    {% else %}
-      <div class="step" id="{{ step.order }}">
-        <div class="step-header">{{ step.title }}</div>
-        <img src="/teachable/images/{{step.image}}">
-      </div>
-    {% endif %}
-  {% endfor %}
+      {% for step in steps %}
+        {% if step.order == steps|length %}
+          <div class="step card last" id="{{ step.order }}">
+            <div class="step-header">{{ step.title }}</div>
+            <div class="step content container">
+              <img src="/teachable/images/{{step.image}}" alt="image for {{ step.title }}">
+              <p>{{ step.content }}</p>
+            </div>
+          </div>
+          <div class="lightbox container inactive">
+              <img src="/teachable/images/{{step.image}}" alt="image for {{ step.title }}">
+          </div>
+        {% else %}
+          <div class="step card" id="{{ step.order }}">
+            <div class="step-header">{{ step.title }}</div>
+            <div class="step content container">
+                <img src="/teachable/images/{{step.image}}" alt="image for {{ step.title }}">
+                <p>{{ step.content }}</p>
+            </div>
+          </div>
+          <div class="lightbox container inactive">
+            <img src="/teachable/images/{{step.image}}" alt="image for {{ step.title }}">
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="page container"><span class="forward"></span></div>
+  </div>
 </div>
 
 {% endblock %}
